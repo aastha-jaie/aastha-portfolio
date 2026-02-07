@@ -39,3 +39,43 @@ npm run build
 ```
 
 Then deploy `dist/client`.
+
+## GitHub Pages (github.io) Hosting
+These steps publish the static build to your GitHub Pages site.
+
+### Option A: gh-pages branch (most common)
+1. Create a GitHub repo named `aastha-portfolio`.
+2. Build the site:
+   ```bash
+   npm run build
+   ```
+3. From the project root, publish the `dist/client` folder to the `gh-pages` branch:
+   ```bash
+   npx gh-pages -d dist/client
+   ```
+4. In GitHub: **Settings → Pages**  
+   - Source: `gh-pages` branch  
+   - Folder: `/ (root)`
+5. Your site will be live at:  
+   `https://aastha-jaie.github.io/aastha-portfolio/`
+
+### Option B: docs/ folder
+1. Build the site:
+   ```bash
+   npm run build
+   ```
+2. Copy `dist/client` into `docs/`:
+   ```bash
+   rm -rf docs
+   cp -R dist/client docs
+   ```
+3. Commit and push.
+4. In GitHub: **Settings → Pages**  
+   - Source: `main` branch  
+   - Folder: `/docs`
+
+### Important
+Make sure these URLs match your GitHub Pages domain:
+- `index.html`
+- `public/robots.txt`
+- `public/sitemap.xml`

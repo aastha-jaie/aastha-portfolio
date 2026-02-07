@@ -8,7 +8,8 @@
     "build:client": "vite build --outDir dist/client",
     "build:server": "vite build --outDir dist/server --ssr src/entry-server.tsx",
     "build": "npm run build:client && npm run build:server && node prerender",
-    "preview": "node server --prod"
+    "preview": "node server --prod",
+    "deploy": "npm run build && gh-pages -d dist/client"
   },
   "dependencies": {
     "compression": "^1.8.0",
@@ -21,6 +22,7 @@
     "@types/react": "18.3.4",
     "@types/react-dom": "18.3.0",
     "@vitejs/plugin-react": "4.3.1",
+    "gh-pages": "^6.1.1",
     "typescript": "5.5.4",
     "vite": "5.4.1"
   }
