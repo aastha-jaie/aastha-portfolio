@@ -3,8 +3,6 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "homepage": "https://aastha-jaie.github.io/Aastha-Portfolio",
-
   "scripts": {
     "dev": "node server",
     "build:client": "vite build --outDir dist/client",
@@ -12,7 +10,7 @@
     "build": "npm run build:client && npm run build:server && node prerender",
     "preview": "node server --prod",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist/client"
   },
   "dependencies": {
     "compression": "^1.8.0",
