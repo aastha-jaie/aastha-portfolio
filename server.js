@@ -7,6 +7,7 @@ import { createServer as createViteServer } from "vite";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const isProd = process.argv.includes("--prod") || process.env.NODE_ENV === "production";
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
+const baseUrl = (process.env.BASE_PATH || "/").replace(/\/?$/, "/");
 
 const app = express();
 let vite;
@@ -15,6 +16,7 @@ if (!isProd) {
   vite = await createViteServer({
     server: { middlewareMode: true },
     appType: "custom",
+    base: baseUrl,
   });
   app.use(vite.middlewares);
 } else {
@@ -22,6 +24,7 @@ if (!isProd) {
   const sirv = (await import("sirv")).default;
   app.use(compression());
   app.use(
+    baseUrl,
     sirv(path.resolve(__dirname, "dist/client"), {
       extensions: [],
     })
@@ -29,7 +32,10 @@ if (!isProd) {
 }
 
 app.use("*", async (req, res) => {
-  const url = req.originalUrl;
+  const url =
+    baseUrl !== "/" && req.originalUrl.startsWith(baseUrl)
+      ? req.originalUrl.slice(baseUrl.length - 1)
+      : req.originalUrl;
 
   try {
     let template;

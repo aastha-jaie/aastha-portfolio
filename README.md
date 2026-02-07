@@ -43,6 +43,16 @@ Then deploy `dist/client`.
 ## GitHub Pages (github.io) Hosting
 These steps publish the static build to your GitHub Pages site.
 
+### Base Path
+This project is configured to build with the GitHub Pages base path:
+`/aastha-portfolio/`. That means production assets will be generated with that prefix.
+
+If you change the repo name, update it in:
+- `vite.config.ts` (`repoName`)
+- `index.html` (canonical + OG URLs)
+- `public/robots.txt`
+- `public/sitemap.xml`
+
 ### Option A: gh-pages branch (most common)
 1. Create a GitHub repo named `aastha-portfolio`.
 2. Build the site:
@@ -73,6 +83,12 @@ These steps publish the static build to your GitHub Pages site.
 4. In GitHub: **Settings → Pages**  
    - Source: `main` branch  
    - Folder: `/docs`
+
+### Preview with GitHub Pages base path
+If you want to preview the production build locally with the repo base path:
+```bash
+BASE_PATH=/aastha-portfolio npm run preview
+```
 
 ### Important
 Make sure these URLs match your GitHub Pages domain:
